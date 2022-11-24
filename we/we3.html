@@ -1,0 +1,60 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="position()">
+    <div id="container">
+<input id="city" placeholder="enter_city">
+    </div>
+</body>
+<script>
+    
+ 
+  function  position(){
+
+    const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  const crd = pos.coords;
+
+  console.log('Your current position is:');
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+
+async function position(){
+
+    await fetch(`http://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units=metric`)
+}
+
+
+
+}
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options)
+
+
+
+
+}
+
+
+
+
+// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
+
+</script>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}
+.mapouter{position:relative;text-align:right;height:500px;width:600px;}
+
+#dis{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+} 
+
+
+
+    </style>
+<body>
+<h1>Weather_Forecasting_app</h1>
+    <input type="text" placeholder="Enter city" id="city">
+    <button onclick="myweather()">Submit</button>
+    <div id="forecast">
+
+
+
+    </div>
+
+
+    <div id="dis">
+        <div id="cont">
+
+        </div>
+
+    <div class="mapouter">
+        <div class="gmap_canvas">
+            <iframe width="600" height="500" id="gmap_canvas" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            <a href="https://putlocker-is.org">putlocker</a><br>
+            
+            <a href="https://www.embedgooglemap.net">embedded google maps</a>
+            
+        </div>
+    </div>
+</div>
+   
+
+   
+</body>
+<script>
+//5de76bd29cab4fa0fb27795441ddfc21
+//https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+
+
+
+// api.openweathermap.org/data/2.5/forecast/daily?q=London&units=metric&cnt=7&appid={API key}
+
+
+
+
+
+
+
+
+
+
+
+let data;
+     async function myweather(){
+
+      let city=document.getElementById("city").value;
+      
+    try{
+let res=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5de76bd29cab4fa0fb27795441ddfc21&units=metric`)
+
+ data = await res.json()
+//console.log(data)
+ 
+showdata(data)
+
+    }catch(err){
+console.log("error:",err)
+    }
+      }
+      let map=document.getElementById("gmap_canvas")
+
+let cont=document.getElementById("cont")
+    function showdata(data){
+        document.getElementById("cont").innerHTML=null;
+let temp=document.createElement("p")
+temp.innerText=`Temp--${data.main.temp} C`
+
+let city=document.createElement("h3")
+city.innerText=`City--${data.name}`
+
+let humid=document.createElement("h3")
+humid.innerText=`humid--${data.main.humidity} `
+
+let pres=document.createElement("h3")
+pres.innerText=`pressure--${data.main.pressure} pascal`
+
+
+let country=document.createElement("h3")
+country.innerText=`Country--${data.sys.country} `
+
+
+
+
+cont.append(country,city,temp,humid,pres)
+
+map.src=`https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+    }
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
+
+
+
+
+
+
